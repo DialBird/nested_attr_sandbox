@@ -6,7 +6,17 @@
         - @user.errors.full_messages.each do |message|
           li = message
 
-  .field
-    = f.label :name
-    = f.text_field :name
-  .actions = f.submit
+  .form-group.row
+    .col-md-3
+      = f.label :name
+    .col-md-9
+      = f.text_field :name, class: 'form-control'
+  .form-group.row
+    .col-md-3
+      = f.label :dogs
+    .col-md-9.ml-auto
+      = f.fields_for :dogs do |dog|
+        = render 'dog_fields', f: dog
+      = link_to_add_association f, :dogs, id: "dogList", class: "btn btn-link", data: { association_insertion_node: "#dogList", association_insertion_method: "before" } do
+            = fa_icon "plus", text: "アイテムを追加"
+  = f.submit 'Submit', class: 'btn btn-success w-100'
