@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_27_042416) do
+ActiveRecord::Schema.define(version: 2018_08_27_042610) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "dogs", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -21,4 +28,5 @@ ActiveRecord::Schema.define(version: 2018_08_27_042416) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "dogs", "users", name: "dogs_user_id_fk"
 end
